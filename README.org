@@ -1,11 +1,9 @@
 * SYFI
 
-SYstem of FIle-system tools
+[SY]stem of [FI]le-system systems
 
 A comprehensive, discoverable entry point for Common Lisp
-pathname, directory and filesystem tools.
-
-No renaming; UIOP preferred on collisions.
+pathname, directory and filesystem related systems.
 
 * Motivation
 
@@ -15,34 +13,28 @@ file-finder, path-string, and many smaller libraries.
 
 New (and old) wizards have no single place to look.
 
-SYFI gathers everything into one kitchen-sink package and,
-optionally, into discoverable subpackages.
+SYFI gathers everything into one kitchen-sink package,
+and soon, into discoverable subpackages.
 
 * Status
 
-WIP
-
 - Objective 1 (kitchen-sink) – complete.
-- Objective 2 (categorical subpackages) – scaffold with two working examples
+- Objective 2 (categorical subpackages) – TODO scaffold with two working examples pull requests welcome
 
 * Design principles
 
 - Zero renaming – original symbol names are preserved.
 - UIOP preferred on name collisions.
-- Conduit packages (via org.tfeb.conduit-packages) – dynamic re-export,
-  easy selective inclusion/exclusion.
+- Uses conduit packages (via org.tfeb.conduit-packages) for re-export and inclusion exclusion
 - Kitchen-sink first – (use-package :syfi) gives the complete surface.
-- Categorical subpackages – smaller, intention-revealing views that can
-  be used independently.
+- Categorical subpackages – smaller, intention-revealing views that can be used independently.
 - osicat excluded by design.
 
 * Quick start
 
-&&& rename to syfi VVV
+(asdf:load-system :metarepl.systems.syfi)
 
-(asdf:load-system :syfi)   ; or ocicl / quicklisp equivalent
-
-(use-package :syfi)        ; everything
+(use-package :syfi)
 
 ;; or the smaller views
 (use-package :syfi/pathname)

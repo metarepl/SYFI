@@ -20,6 +20,12 @@
 ;;;; "Tools that operate on pathname objects themselves
 ;;;; (construction, predicates, component access, normalisation).
 ;;;; No filesystem I/O."
+
+;; - pathname
+;;   Pure pathname objects (no I/O).
+;;   Construction, predicates, components, normalisation,
+;;   absolute/relative, logical/physical, wildcards.
+
 ;;;; ------------------------------------------------------------------
 
 (org.tfeb.conduit-packages:define-conduit-package #:syfi/pathname
@@ -70,15 +76,19 @@
                       #:translate-logical-pathname
                       #:load-logical-pathname-translations))
 
-;;;; ------------------------------------------------------------------
-;;;; syfi/probe
-;;;;   Existence / type queries – “does this path exist?”, “is it a
-;;;;   file or a directory?”  Read-only filesystem contact.
+;; ------------------------------------------------------------------
+;; syfi/probe
+;;   Existence / type queries – “does this path exist?”, “is it a
+;;   file or a directory?”  Read-only filesystem contact.
 
-;;;; "Read-only probes of the filesystem: existence, type, truename,
-;;;; basic attributes.  No mutation."
+;; "Read-only probes of the filesystem: existence, type, truename,
+;; basic attributes.  No mutation."
 
-;;;; ------------------------------------------------------------------
+;;  syfi/probe
+;;  Existence and type queries (read-only).
+;;  probe-file*, file-exists-p, directory-p, truename*, basic attributes.
+
+;; ------------------------------------------------------------------
 
 (org.tfeb.conduit-packages:define-conduit-package #:syfi/probe
   ;; UIOP probes
@@ -107,11 +117,89 @@
                       #:file-write-date
                       #:file-author))
 
+;; ------------------------------------------------------------------
+;; syfi/namestring
+;; String ↔ pathname and pure string path manipulation.
+;; Native/Unix/DOS namestrings, join, split, dirname/basename/extname.
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/namestring)
 
-;;;; ------------------------------------------------------------------
-;;;; syfi/subsystem &&&
-;;;;   what is my purpose
-;;;; ------------------------------------------------------------------
+;; ------------------------------------------------------------------
+;; syfi/components
+;; Fine-grained component access and reconstruction.
+;; host/device/directory/name/type/version, plists, split-name-type.
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/components)
+
+;; ------------------------------------------------------------------
+;; syfi/directory
+;; Listing and walking.
+;; directory*, directory-files, walk-directory, collect-sub*directories.
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/directory)
+
+;; ------------------------------------------------------------------
+;; syfi/mutate
+;; Creating, deleting, renaming, copying.
+;; ensure-directories-exist, delete-directory-tree, copy-file*, rename\ldots
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/mutate)
+
+;; ------------------------------------------------------------------
+;; syfi/logical
+;; Logical pathnames.
+;; logical-pathname, translations, translate-logical-pathname.
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/logical)
+
+;; ------------------------------------------------------------------
+;; syfi/cwd
+;; Current working directory and process context.
+;; getcwd, with-current-directory, user-homedir-pathname.
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/cwd)
+
+;; ------------------------------------------------------------------
+;; syfi/wild
+;; Wildcard utilities.
+;; *wild*, *wild-file*, *wild-directory*, wilden, pathname-match-p.
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/wild)
+
+;; ------------------------------------------------------------------
+;; syfi/temp
+;; Temporary files and staging.
+;; temporary-file helpers, tmpize-pathname, tmpdir.
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/temp)
+
+;; ------------------------------------------------------------------
+;; syfi/attributes
+;; Rich file metadata.
+;; size, extended timestamps, permissions\ldots
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/attributes)
+
+;; ------------------------------------------------------------------
+;; syfi/search
+;; High-level search and discovery.
+;; file-finder / finder / finder*.
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/search)
+
+;; ------------------------------------------------------------------
+;; syfi/config
+;; User/application configuration and data locations.
+;; nfiles, path-parse of $PATH, XDG-style resolution.
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/config)
+
+;; ------------------------------------------------------------------
+;; syfi/special
+;; Niche / legacy helpers.
+;; illogical-pathnames, certain cl-ana utilities, etc.
+;; ------------------------------------------------------------------
+(org.tfeb.conduit-packages:define-conduit-package #:syfi/special)
 
 ;;; ==================================================================
 ;;; Objective 1 – the kitchen-sink entry point
