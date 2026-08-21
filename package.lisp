@@ -1,3 +1,2 @@
-(defpackage #:file-sysys-system
-
+(defpackage #:syfi-init
   (:use #:cl))

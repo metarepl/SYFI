@@ -4,7 +4,7 @@
 ;;;; Prefers UIOP on known name collisions.
 ;;;;
 ;;;; Also provides a partial Objective-2 scaffold of categorical
-;;;; subpackages (file-sysys/pathname, file-sysys/probe).
+;;;; subpackages (syfi/pathname, syfi/probe).
 
 (defsystem "metarepl.systems.syfi"
   :description "Comprehensive categorical re-export of Common Lisp pathname, directory and filesystem tools ."
@@ -16,8 +16,8 @@
                :cl-fad
                :pathname-utils
                :filesystem-utils
+               :file-notify
                :file-finder
-               :ppath
                :path-string
                :illogical-pathnames
                :com.gigamonkeys.pathnames
@@ -29,7 +29,6 @@
                :nfiles
                :path-parse
                :mnas-path
-               :pathnames
                :cl-ana.pathname-utils
                :cl-ana.file-utils)
   :serial t

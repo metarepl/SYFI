@@ -11,7 +11,7 @@ No renaming; UIOP preferred on collisions.
 
 Pathname / filesystem functionality in Common Lisp is spread across the
 ANSI standard, UIOP, cl-fad, pathname-utils, filesystem-utils,
-file-finder, ppath, path-string, and many smaller libraries.
+file-finder, path-string, and many smaller libraries.
 
 New (and old) wizards have no single place to look.
 
@@ -23,8 +23,7 @@ optionally, into discoverable subpackages.
 WIP
 
 - Objective 1 (kitchen-sink) – complete.
-- Objective 2 (categorical subpackages) – scaffold with two working
-  examples; full set planned according to the ontology above.
+- Objective 2 (categorical subpackages) – scaffold with two working examples
 
 * Design principles
 
@@ -41,13 +40,13 @@ WIP
 
 &&& rename to syfi VVV
 
-(asdf:load-system :file-sysys)   ; or ocicl / quicklisp equivalent
+(asdf:load-system :syfi)   ; or ocicl / quicklisp equivalent
 
-(use-package :file-sysys)        ; everything
+(use-package :syfi)        ; everything
 
 ;; or the smaller views
-(use-package :file-sysys/pathname)
-(use-package :file-sysys/probe)
+(use-package :syfi/pathname)
+(use-package :syfi/probe)
 
 * Ontology of categories
 
@@ -110,13 +109,13 @@ WIP
 
 * Currently implemented packages
 
-- file-sysys
+- syfi
   The complete kitchen-sink (re-exports everything + the subpackages).
 
-- file-sysys/pathname
+- syfi/pathname
   Pure pathname object tools (scaffold).
 
-- file-sysys/probe
+- syfi/probe
   Read-only existence/type queries (scaffold).
 
 All other categories listed above are planned and follow the same
@@ -135,7 +134,7 @@ subpackages are filled in.
 
 * Systems re-exported
 
-uiop, cl-fad, pathname-utils, filesystem-utils, file-finder, ppath,
+uiop, cl-fad, pathname-utils, filesystem-utils, file-finder,
 path-string, illogical-pathnames, com.gigamonkeys.pathnames,
 temporary-file, tmpdir, file-attributes, trivial-file-size,
 copy-directory, nfiles, path-parse, mnas-path, pathnames,
@@ -148,5 +147,5 @@ cl-ana.pathname-utils, cl-ana.file-utils.
 - Add a new categorical conduit with define-conduit-package.
 - Prefer UIOP, then the clearest modern library, then the rest.
 - Use :extends/excluding for any residual name clashes.
-- Make the top-level file-sysys also (:extends \ldots) the new subpackage.
+- Make the top-level syfi also (:extends \ldots) the new subpackage.
 - Update the ontology list.
