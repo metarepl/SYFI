@@ -1,0 +1,152 @@
+* SYFI
+
+SYstem of FIle-system tools
+
+A comprehensive, discoverable entry point for Common Lisp
+pathname, directory and filesystem tools.
+
+No renaming; UIOP preferred on collisions.
+
+* Motivation
+
+Pathname / filesystem functionality in Common Lisp is spread across the
+ANSI standard, UIOP, cl-fad, pathname-utils, filesystem-utils,
+file-finder, ppath, path-string, and many smaller libraries.
+
+New (and old) wizards have no single place to look.
+
+SYFI gathers everything into one kitchen-sink package and,
+optionally, into discoverable subpackages.
+
+* Status
+
+WIP
+
+- Objective 1 (kitchen-sink) – complete.
+- Objective 2 (categorical subpackages) – scaffold with two working
+  examples; full set planned according to the ontology above.
+
+* Design principles
+
+- Zero renaming – original symbol names are preserved.
+- UIOP preferred on name collisions.
+- Conduit packages (via org.tfeb.conduit-packages) – dynamic re-export,
+  easy selective inclusion/exclusion.
+- Kitchen-sink first – (use-package :syfi) gives the complete surface.
+- Categorical subpackages – smaller, intention-revealing views that can
+  be used independently.
+- osicat excluded by design.
+
+* Quick start
+
+&&& rename to syfi VVV
+
+(asdf:load-system :file-sysys)   ; or ocicl / quicklisp equivalent
+
+(use-package :file-sysys)        ; everything
+
+;; or the smaller views
+(use-package :file-sysys/pathname)
+(use-package :file-sysys/probe)
+
+* Ontology of categories
+
+- pathname
+  Pure pathname objects (no I/O).
+  Construction, predicates, components, normalisation,
+  absolute/relative, logical/physical, wildcards.
+
+- namestring
+  String ↔ pathname and pure string path manipulation.
+  Native/Unix/DOS namestrings, join, split, dirname/basename/extname.
+
+- components
+  Fine-grained component access and reconstruction.
+  host/device/directory/name/type/version, plists, split-name-type.
+
+- probe
+  Existence and type queries (read-only).
+  probe-file*, file-exists-p, directory-p, truename*, basic attributes.
+
+- directory
+  Listing and walking.
+  directory*, directory-files, walk-directory, collect-sub*directories.
+
+- mutate
+  Creating, deleting, renaming, copying.
+  ensure-directories-exist, delete-directory-tree, copy-file*, rename\ldots
+
+- logical
+  Logical pathnames.
+  logical-pathname, translations, translate-logical-pathname.
+
+- cwd
+  Current working directory and process context.
+  getcwd, with-current-directory, user-homedir-pathname.
+
+- wild
+  Wildcard utilities.
+  *wild*, *wild-file*, *wild-directory*, wilden, pathname-match-p.
+
+- temp
+  Temporary files and staging.
+  temporary-file helpers, tmpize-pathname, tmpdir.
+
+- attributes
+  Rich file metadata.
+  size, extended timestamps, permissions\ldots
+
+- search
+  High-level search and discovery.
+  file-finder / finder / finder*.
+
+- config
+  User/application configuration and data locations.
+  nfiles, path-parse of $PATH, XDG-style resolution.
+
+- special
+  Niche / legacy helpers.
+  illogical-pathnames, certain cl-ana utilities, etc.
+
+* Currently implemented packages
+
+- file-sysys
+  The complete kitchen-sink (re-exports everything + the subpackages).
+
+- file-sysys/pathname
+  Pure pathname object tools (scaffold).
+
+- file-sysys/probe
+  Read-only existence/type queries (scaffold).
+
+All other categories listed above are planned and follow the same
+conduit pattern.
+
+* Collision handling
+
+Only a few exemplars are resolved so far:
+
+- pathname-equal – taken from uiop/pathname, excluded from cl-fad
+  and pathname-utils.
+
+Further collisions will be handled the same way
+(:extends/excluding / :extends/including) as the remaining
+subpackages are filled in.
+
+* Systems re-exported
+
+uiop, cl-fad, pathname-utils, filesystem-utils, file-finder, ppath,
+path-string, illogical-pathnames, com.gigamonkeys.pathnames,
+temporary-file, tmpdir, file-attributes, trivial-file-size,
+copy-directory, nfiles, path-parse, mnas-path, pathnames,
+cl-ana.pathname-utils, cl-ana.file-utils.
+
+(osicat deliberately omitted.)
+
+* Extending the system
+
+- Add a new categorical conduit with define-conduit-package.
+- Prefer UIOP, then the clearest modern library, then the rest.
+- Use :extends/excluding for any residual name clashes.
+- Make the top-level file-sysys also (:extends \ldots) the new subpackage.
+- Update the ontology list.
