@@ -18,8 +18,24 @@ and soon, into discoverable subpackages.
 
 * Status
 
-- Objective 1 (kitchen-sink) – complete.
-- Objective 2 (categorical subpackages) – TODO scaffold with two working examples pull requests welcome
+- Objective 1 (gather all packages and resolve collisions) – complete.
+- TODO Objective 2 (categorical subpackages)
+  – scaffold with two working examples
+  - pull requests welcome
+
+- syfi
+  Everything and the kitchen-sink
+
+- syfi/pathname
+  Pure pathname object tools
+
+- syfi/probe
+  Read-only existence/type queries
+
+All other categories are to follow the same conduit pattern.
+
+As the remaining subpackages are filled in
+further collisions will be handled the same way
 
 * Design principles
 
@@ -99,40 +115,15 @@ and soon, into discoverable subpackages.
   Niche / legacy helpers.
   illogical-pathnames, certain cl-ana utilities, etc.
 
-* Currently implemented packages
-
-- syfi
-  The complete kitchen-sink (re-exports everything + the subpackages).
-
-- syfi/pathname
-  Pure pathname object tools (scaffold).
-
-- syfi/probe
-  Read-only existence/type queries (scaffold).
-
-All other categories listed above are planned and follow the same
-conduit pattern.
-
-* Collision handling
-
-Only a few exemplars are resolved so far:
-
-- pathname-equal – taken from uiop/pathname, excluded from cl-fad
-  and pathname-utils.
-
-Further collisions will be handled the same way
-(:extends/excluding / :extends/including) as the remaining
-subpackages are filled in.
-
 * Systems re-exported
 
 uiop, cl-fad, pathname-utils, filesystem-utils, file-finder,
 path-string, illogical-pathnames, com.gigamonkeys.pathnames,
-temporary-file, tmpdir, file-attributes, trivial-file-size,
+temporary-file, tmpdir, file-notify, file-attributes, trivial-file-size,
 copy-directory, nfiles, path-parse, mnas-path, pathnames,
-cl-ana.pathname-utils, cl-ana.file-utils.
+cl-ana.pathname-utils, cl-ana.file-utils
 
-(osicat deliberately omitted.)
+osicat is deliberately omitted because it borks my stuff
 
 * Extending the system
 
